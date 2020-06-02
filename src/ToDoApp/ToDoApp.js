@@ -5,23 +5,20 @@ function ToDoApp() {
 	return (
 <div id="ToDoApp">
 	<header>
-		<div className="header-inner">
-			<div className="logo">ToDo</div>
-			<div className="filters">
-				<input type="text" aria-label="Filter To Do items" />
-				<button>
-					<span className="icon-search"></span> Filter
-				</button>
-			</div>
-		</div>
+		<input type="text" aria-label="Filter To Do items" />
+		<button>
+			<span className="icon-search"></span> Filter
+		</button>
 	</header>
 	<main>
 		<ul id="ListItems">
 			<li>
-				<input type="text" />
-				<div className="timestamps">
-					<span className="completed"></span>
-					<span className="created"></span>
+				<div className="text">
+					<input type="text" />
+					<div className="timestamps">
+						<span className="completed"></span>
+						<span className="created"></span>
+					</div>
 				</div>
 				<div className="actions">
 					<button className="delete">

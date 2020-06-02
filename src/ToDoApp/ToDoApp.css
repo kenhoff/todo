@@ -12,7 +12,7 @@
 
 header {
 	flex: 0 0 auto;
-	padding: 30px;
+	padding: 15px 30px;
 	border-bottom: 1px solid #C8CAE3;
 	text-align: center;
 }
@@ -26,7 +26,7 @@ main {
 
 footer {
 	flex: 0 0 auto;
-	padding: 30px;
+	padding: 15px 30px;
 	border-top: 1px solid #C8CAE3;
 	text-align: center;
 }
@@ -38,6 +38,40 @@ footer {
 }
 
 #ListItems li {
+	display: flex;
 	padding: 15px 30px;
 	border-bottom: 1px solid #fff;
 }
+
+#ListItems li .text {
+	box-sizing: border-box;
+	width: 75%;
+}
+
+#ListItems li .actions {
+	box-sizing: border-box;
+	width: 25%;
+}
+
+#ListItems li:last-child {
+	border-bottom: none;
+}
+
+header input[type=text], footer input[type=text] {
+	border-radius: 15px 0 0 15px;
+	padding: 8px;
+	border: 1px solid #C8CAE3;
+	border-right: none;
+	box-shadow: inset 2px 2px 3px rgba(0,0,0,0.25);
+	line-height: 1;
+}
+
+header button, footer button {
+	background: #eee;
+	border-radius: 0 15px 15px 0;
+	padding: 8px;
+	border: 1px solid #C8CAE3;
+	box-shadow: 2px 2px 3px rgba(0,0,0,0.25);
+	line-height: 1;
+}
+
