@@ -7,29 +7,35 @@ class ToDoItem extends React.Component {
 // TODO: pull items from local storage
 
 		this.state = props.item;
-		this.key = this.state.key;
+		this.index = props.index;
+		this.textRef = React.createRef();
 		this.handleChange = this.handleChange.bind(this);
 	}
 
 	handleChange(event){
+		let text = this.textRef.current.innerHTML;
+		if (text == this.state.text) return;
+
 		this.setState({
-			text: event.target.value
+			text: text
 		});
 	}
 
 	render() {
 		return (
-			<li key={this.key}>
+			<li>
 				<div 
 					className="text"
+					ref={this.textRef}
 					role="textbox" 
 					contentEditable="true" 
 					aria-multiline="true" 
 					aria-label={"To Do Item: " + this.state.text} 
 					aria-required="true" 
 					suppressContentEditableWarning={true}
-					onChange={this.handleChange}>
-						{this.state.text}
+					onInput={this.handleChange}
+					onBlur={this.handleChange}
+					dangerouslySetInnerHTML={{__html: this.state.text}}>
 				</div>
 				<div className="actions">
 					<button className="delete">

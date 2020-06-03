@@ -43,15 +43,15 @@ class ToDoApp extends React.Component {
 
 
 
-	renderItem(item){
+	renderItem(item, index){
 		return (
-			<ToDoItem item={item} key={item.key} />
+			<ToDoItem item={item} key={item.key} index={index} />
 		);
 	}
 
 	renderListOfItems(){
 		let items = this.state.items;
-		return items.map(item => this.renderItem(item));
+		return items.map((item, index) => this.renderItem(item, index));
 	}
 
 	render() {
