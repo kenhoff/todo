@@ -14,6 +14,11 @@ class ToDoApp extends React.Component {
 
 		this.handleAddNewSubmit = this.handleAddNewSubmit.bind(this);
 		this.handleAddNewChange = this.handleAddNewChange.bind(this);
+		this.deleteItem = this.deleteItem.bind(this);
+		this.moveDown = this.moveDown.bind(this);
+		this.moveUp = this.moveUp.bind(this);
+		this.moveTop = this.moveTop.bind(this);
+		this.moveBottom = this.moveBottom.bind(this);
 	}
 
 
@@ -41,11 +46,77 @@ class ToDoApp extends React.Component {
 		this.setState({addNewValue: event.target.value});
 	}
 
+	addItem(index, item){
+		if (!item) return false;
+
+		this.state.items.splice(index, 0, item);
+		this.setState({items: this.state.items});
+	}
+
+	findItemIndexByKey(itemKey){
+		return this.state.items.findIndex(item => item.key === itemKey);
+	}
+
+	deleteItem(itemKey){
+		let itemIndex = this.findItemIndexByKey(itemKey);
+		let item = this.state.items[itemIndex];
+
+		if (!item) return false;
+
+		this.state.items.splice(itemIndex, 1);
+		this.setState({items: this.state.items});
+
+		return item;
+	}
+
+	moveDown(itemKey){
+		let itemIndex = this.findItemIndexByKey(itemKey);
+
+		if (itemIndex === this.state.items.length - 1) return;
+
+		let item = this.deleteItem(itemKey);
+		this.addItem(itemIndex + 1, item);
+	}
+
+	moveUp(itemKey){
+		let itemIndex = this.findItemIndexByKey(itemKey);
+		
+		if (itemIndex === 0) return;
+
+		let item = this.deleteItem(itemKey);
+		this.addItem(itemIndex - 1, item);
+	}
+
+	moveTop(itemKey){
+		let itemIndex = this.findItemIndexByKey(itemKey);
+
+		if (itemIndex === 0) return;
+
+		let item = this.deleteItem(itemKey);
+		this.addItem(0, item);
+	}
+
+	moveBottom(itemKey){
+		let itemIndex = this.findItemIndexByKey(itemKey);
+		let lastIndex = this.state.items.length - 1;
+
+		if (itemIndex === lastIndex) return;
+
+		let item = this.deleteItem(itemKey);
+		this.addItem(lastIndex, item);
+	}
 
 
 	renderItem(item, index){
 		return (
-			<ToDoItem item={item} key={item.key} index={index} />
+			<ToDoItem 
+				item={item} 
+				key={item.key}
+				deleteItem={this.deleteItem}
+				moveDown={this.moveDown}
+				moveUp={this.moveUp}
+				moveTop={this.moveTop}
+				moveBottom={this.moveBottom} />
 		);
 	}
 
