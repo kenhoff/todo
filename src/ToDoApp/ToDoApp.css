@@ -11,25 +11,11 @@
 	border-radius: 20px;
 }
 
-header {
-	flex: 0 0 auto;
-	padding: 15px 30px;
-	border-bottom: 1px solid #C8CAE3;
-	text-align: center;
-}
-
 main {
 	flex: 1 1 auto;
 	overflow: auto;
 	border-top: 1px solid white;
 	border-bottom: 1px solid white;
-}
-
-footer {
-	flex: 0 0 auto;
-	padding: 15px 30px;
-	border-top: 1px solid #C8CAE3;
-	text-align: center;
 }
 
 #ListItems {
@@ -38,7 +24,48 @@ footer {
 	padding: 0;
 }
 
-header input[type=text], footer input[type=text] {
+header {
+	flex: 0 0 auto;
+	padding: 15px;
+	border-bottom: 1px solid #C8CAE3;
+	text-align: center;
+	position: relative;
+}
+
+header input[type=text] {
+	box-sizing: border-box;
+	border-radius: 15px;
+	padding: 8px;
+	border: 1px solid #C8CAE3;
+	box-shadow: inset 2px 2px 3px rgba(0,0,0,0.25);
+	line-height: 1;
+	width: 100%;
+}
+
+header button.clear {
+	position: absolute;
+	top: 2px;
+	right: 5px;
+	background: transparent;
+	border: none;
+	line-height: 1;
+}
+
+
+footer {
+	flex: 0 0 auto;
+	padding: 15px;
+	border-top: 1px solid #C8CAE3;
+	text-align: center;
+}
+
+footer form {
+	display: flex;
+}
+
+footer input[type=text] {
+	box-sizing: border-box;
+	flex: 1 1 auto;
 	border-radius: 15px 0 0 15px;
 	padding: 8px;
 	border: 1px solid #C8CAE3;
@@ -47,7 +74,9 @@ header input[type=text], footer input[type=text] {
 	line-height: 1;
 }
 
-header button, footer button {
+footer button {
+	box-sizing: border-box;
+	flex: 0 0 auto;
 	background: #eee;
 	border-radius: 0 15px 15px 0;
 	padding: 8px;

@@ -9,7 +9,8 @@ class ToDoApp extends React.Component {
 
 		this.state = {
 			items:[], 
-			addNewValue: ''
+			addNewValue: '',
+			searchValue: ''
 		};
 
 		this.handleAddNewSubmit = this.handleAddNewSubmit.bind(this);
@@ -19,6 +20,8 @@ class ToDoApp extends React.Component {
 		this.moveUp = this.moveUp.bind(this);
 		this.moveTop = this.moveTop.bind(this);
 		this.moveBottom = this.moveBottom.bind(this);
+		this.updateSearch = this.updateSearch.bind(this);
+		this.clearSearch = this.clearSearch.bind(this);
 	}
 
 
@@ -44,6 +47,15 @@ class ToDoApp extends React.Component {
 	
 	handleAddNewChange(event){
 		this.setState({addNewValue: event.target.value});
+	}
+
+	updateSearch(event){
+		this.setState({searchValue: event.target.value});
+	}
+
+	clearSearch(event){
+		this.setState({searchValue: ''});
+		event.preventDefault();
 	}
 
 	addItem(index, item){
@@ -122,6 +134,11 @@ class ToDoApp extends React.Component {
 
 	renderListOfItems(){
 		let items = this.state.items;
+		
+		if (this.state.searchValue){
+			items = this.state.items.filter(item => item.text.search(this.state.searchValue) > -1);
+		}
+
 		return items.map((item, index) => this.renderItem(item, index));
 	}
 
@@ -129,9 +146,9 @@ class ToDoApp extends React.Component {
 		return (
 			<div id="ToDoApp">
 				<header>
-					<input type="text" aria-label="Filter To Do items" />
-					<button>
-						<span className="icon-search"></span> Filter
+					<input type="text" value={this.state.searchValue} name="searchInput" id="searchInput" aria-label="Filter To Do items" onChange={this.updateSearch} />
+					<button className="clear" onClick={this.clearSearch}>
+						<span className="icon-cancel-circle"></span>
 					</button>
 				</header>
 				<main>
@@ -142,7 +159,7 @@ class ToDoApp extends React.Component {
 				<footer>
 					<form onSubmit={this.handleAddNewSubmit}>
 						<input type="text" id="addNewInput" name="addNewInput" aria-label="Add new list items" value={this.state.addNewValue} onChange={this.handleAddNewChange} />
-						<button type="submit">
+						<button type="submit" name="addNewButton">
 							<span className="icon-plus"></span> Add New
 						</button>
 					</form>

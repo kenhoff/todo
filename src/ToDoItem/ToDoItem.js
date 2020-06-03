@@ -14,6 +14,7 @@ class ToDoItem extends React.Component {
 		this.moveUp = this.moveUp.bind(this);
 		this.moveTop = this.moveTop.bind(this);
 		this.moveBottom = this.moveBottom.bind(this);
+		this.toggleCompleted = this.toggleCompleted.bind(this);
 	}
 
 	handleChange(event){
@@ -50,10 +51,21 @@ class ToDoItem extends React.Component {
 		this.props.moveBottom(this.state.key);
 	}
 
+	toggleCompleted(event){
+		event.preventDefault();
+
+		this.setState({completed: !this.state.completed})
+	}
+
 
 	render() {
 		return (
-			<li>
+			<li className={this.state.completed ? 'completed' : ''}>
+				<div className="toggle">
+					<button onClick={this.toggleCompleted}>
+						<span className={this.state.completed ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'}></span>
+					</button>
+				</div>
 				<div 
 					className="text"
 					ref={this.textRef}
