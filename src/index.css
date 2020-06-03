@@ -1,8 +1,13 @@
-body {
-	font-family: Trebuchet, Arial, sans-serif;
-	background: #DEE2FF;
-	color: #333;
-	padding: 40px;
-	margin: 0 auto;
+html, body, #root {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	height: 100%;
 }
 
+body {
+	font-family: Trebuchet, Arial, sans-serif;
+	background: #e1e1e1;
+	color: #333;
+	padding: 40px;
+}

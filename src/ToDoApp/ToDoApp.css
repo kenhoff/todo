@@ -4,6 +4,7 @@
 	margin: 0 auto;
 	min-width: 250px;
 	max-width: 600px;
+	height: 100%;
 	background: linear-gradient(-45deg, rgba(0,0,0,0.07), rgba(255,255,255,0.07));
 	box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
 	-8px -8px 12px 0 rgba(255, 255, 255, 0.3);
@@ -35,26 +36,6 @@ footer {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-}
-
-#ListItems li {
-	display: flex;
-	padding: 15px 30px;
-	border-bottom: 1px solid #fff;
-}
-
-#ListItems li .text {
-	box-sizing: border-box;
-	width: 75%;
-}
-
-#ListItems li .actions {
-	box-sizing: border-box;
-	width: 25%;
-}
-
-#ListItems li:last-child {
-	border-bottom: none;
 }
 
 header input[type=text], footer input[type=text] {

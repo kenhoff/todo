@@ -76,3 +76,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 https://css-tricks.com/neumorphism-and-css/
 https://coolors.co/8e9aaf-cbc0d3-dee2ff-efd3d7-feeafa
+https://accessible-colors.com/
+https://icomoon.io/
