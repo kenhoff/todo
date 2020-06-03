@@ -3,21 +3,55 @@ import './ToDoApp.css';
 import ToDoItem from '../ToDoItem/ToDoItem';
 
 class ToDoApp extends React.Component {
+	constructor(props) {
+		super(props);
+// TODO: pull items from local storage
+
+		this.state = {
+			items:[], 
+			addNewValue: ''
+		};
+
+		this.handleAddNewSubmit = this.handleAddNewSubmit.bind(this);
+		this.handleAddNewChange = this.handleAddNewChange.bind(this);
+	}
+
+
+	handleAddNewSubmit(event){
+		event.preventDefault();
+		
+		if (!this.state.addNewValue) return false;
+		
+		let currItems = this.state.items;
+		let newItem = {
+			text: this.state.addNewValue, 
+			completed: false,
+			key: Date.now()
+		};
+
+		currItems.push(newItem);
+
+		this.setState({
+			items: currItems,
+			addNewValue: ''
+		});
+	}
 	
-	items = [
-		{text: 'blahblah blah1', created: 'now', completed: 'then'},
-		{text: 'blahblah blah2222222', created: 'other', completed: 'moar'}
-	];
+	handleAddNewChange(event){
+		this.setState({addNewValue: event.target.value});
+	}
+
 
 
 	renderItem(item){
 		return (
-			<ToDoItem item={item} />
+			<ToDoItem item={item} key={item.key} />
 		);
 	}
 
 	renderListOfItems(){
-		return this.items.map(item => this.renderItem(item));
+		let items = this.state.items;
+		return items.map(item => this.renderItem(item));
 	}
 
 	render() {
@@ -35,10 +69,12 @@ class ToDoApp extends React.Component {
 					</ul>
 				</main>
 				<footer>
-					<input type="text" id="addNewInput" name="addNewInput" aria-label="Add new list items" />
-					<button>
-						<span className="icon-plus"></span> Add New
-					</button>
+					<form onSubmit={this.handleAddNewSubmit}>
+						<input type="text" id="addNewInput" name="addNewInput" aria-label="Add new list items" value={this.state.addNewValue} onChange={this.handleAddNewChange} />
+						<button type="submit">
+							<span className="icon-plus"></span> Add New
+						</button>
+					</form>
 				</footer>
 			</div>
 		);
