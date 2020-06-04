@@ -8,7 +8,7 @@ class ToDoItem extends React.Component {
 		this.state = props.item;
 		this.textRef = React.createRef();
 
-		this.handleChange = this.handleChange.bind(this);
+		this.editText = this.editText.bind(this);
 		this.deleteItem = this.deleteItem.bind(this);
 		this.moveDown = this.moveDown.bind(this);
 		this.moveUp = this.moveUp.bind(this);
@@ -17,13 +17,11 @@ class ToDoItem extends React.Component {
 		this.toggleCompleted = this.toggleCompleted.bind(this);
 	}
 
-	handleChange(event){
+	editText(event){
 		let text = this.textRef.current.innerHTML;
 		if (text === this.state.text) return;
 
-		this.setState({
-			text: text
-		});
+		this.props.editText(this.state.key, text);
 	}
 
 	deleteItem(event){
@@ -54,7 +52,7 @@ class ToDoItem extends React.Component {
 	toggleCompleted(event){
 		event.preventDefault();
 
-		this.setState({completed: !this.state.completed})
+		this.props.toggleCompleted(this.state.key);
 	}
 
 
@@ -71,13 +69,12 @@ class ToDoItem extends React.Component {
 					ref={this.textRef}
 					role="textbox" 
 					contentEditable="true" 
-					aria-multiline="true" 
 					aria-label={"To Do Item: " + this.state.text} 
 					aria-required="true" 
 					suppressContentEditableWarning={true}
-					onInput={this.handleChange}
-					onBlur={this.handleChange}
-					dangerouslySetInnerHTML={{__html: this.state.text}}>
+					onInput={this.editText}
+					onBlur={this.editText}>
+					{this.props.item.text}
 				</div>
 				<div className="actions">
 					<button className="delete" onClick={this.deleteItem}>

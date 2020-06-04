@@ -78,3 +78,5 @@ https://css-tricks.com/neumorphism-and-css/
 https://coolors.co/8e9aaf-cbc0d3-dee2ff-efd3d7-feeafa
 https://accessible-colors.com/
 https://icomoon.io/
+
+https://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable

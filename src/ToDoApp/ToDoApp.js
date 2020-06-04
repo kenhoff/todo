@@ -2,6 +2,22 @@ import React from 'react';
 import './ToDoApp.css';
 import ToDoItem from '../ToDoItem/ToDoItem';
 
+
+class StorageService {
+	storageKey = 'ToDoList';
+
+	static get(){
+		const storage = window.localStorage;
+		return JSON.parse(storage.getItem('ToDoList')) || null;
+	}
+
+	static save(itemList){
+		const storage = window.localStorage;
+		storage.setItem('ToDoList', JSON.stringify(itemList));
+	}
+}
+
+
 class ToDoApp extends React.Component {
 	constructor(props) {
 		super(props);
@@ -20,31 +36,60 @@ class ToDoApp extends React.Component {
 		this.moveUp = this.moveUp.bind(this);
 		this.moveTop = this.moveTop.bind(this);
 		this.moveBottom = this.moveBottom.bind(this);
+		this.toggleItemCompleted = this.toggleItemCompleted.bind(this);
+		this.editItemText = this.editItemText.bind(this);
+
 		this.updateSearch = this.updateSearch.bind(this);
 		this.clearSearch = this.clearSearch.bind(this);
+	}
+
+	// React Life Cycle
+	componentDidMount(){
+		let storedList = StorageService.get();
+
+		if (storedList){
+			this.setState({items: storedList});
+		}
+	}
+
+
+	updateItemList(newList){
+		StorageService.save(newList);
+
+		this.setState({items: newList});
+	}
+
+	updateItem(newItem){
+		let itemList = this.state.items;
+		let index = this.findItemIndexByKey(newItem.key);
+
+		if (index === -1) return;
+		
+		itemList[index] = newItem;
+
+		this.updateItemList(itemList);
 	}
 
 
 	handleAddNewSubmit(event){
 		event.preventDefault();
-		
+
 		if (!this.state.addNewValue) return false;
-		
-		let currItems = this.state.items;
+
+		let lastIndex = this.state.items.length - 1;
 		let newItem = {
 			text: this.state.addNewValue, 
 			completed: false,
 			key: Date.now()
 		};
 
-		currItems.push(newItem);
+		this.addItem(lastIndex, newItem);
 
 		this.setState({
-			items: currItems,
 			addNewValue: ''
 		});
 	}
-	
+
 	handleAddNewChange(event){
 		this.setState({addNewValue: event.target.value});
 	}
@@ -58,11 +103,13 @@ class ToDoApp extends React.Component {
 		event.preventDefault();
 	}
 
+	// item management
 	addItem(index, item){
 		if (!item) return false;
 
 		this.state.items.splice(index, 0, item);
-		this.setState({items: this.state.items});
+
+		this.updateItemList(this.state.items);
 	}
 
 	findItemIndexByKey(itemKey){
@@ -76,7 +123,7 @@ class ToDoApp extends React.Component {
 		if (!item) return false;
 
 		this.state.items.splice(itemIndex, 1);
-		this.setState({items: this.state.items});
+		this.updateItemList(this.state.items);
 
 		return item;
 	}
@@ -118,6 +165,27 @@ class ToDoApp extends React.Component {
 		this.addItem(lastIndex, item);
 	}
 
+	toggleItemCompleted(itemKey){
+		let itemIndex = this.findItemIndexByKey(itemKey);
+		let item = this.state.items[itemIndex];
+
+		if (!item) return false;
+
+		item.completed = !item.completed;
+
+		this.addItem(itemIndex, item);
+	}
+
+	editItemText(itemKey, text){
+		let itemIndex = this.findItemIndexByKey(itemKey);
+		let item = this.state.items[itemIndex];
+
+		if (!item) return false;
+
+		item.text = text;
+		
+		this.addItem(itemIndex, item);
+	}
 
 	renderItem(item, index){
 		return (
@@ -128,7 +196,9 @@ class ToDoApp extends React.Component {
 				moveDown={this.moveDown}
 				moveUp={this.moveUp}
 				moveTop={this.moveTop}
-				moveBottom={this.moveBottom} />
+				moveBottom={this.moveBottom} 
+				toggleCompleted={this.toggleItemCompleted}
+				editText={this.editItemText} />
 		);
 	}
 

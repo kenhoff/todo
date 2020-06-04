@@ -11,3 +11,7 @@ body {
 	color: #333;
 	padding: 40px;
 }
+
+input:focus, button:focus {
+	outline: none;
+}

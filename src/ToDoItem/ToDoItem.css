@@ -12,21 +12,23 @@ li.completed {
 	box-shadow: inset 2px 2px 3px rgba(0, 0,0,0.25), inset -2px -2px 3px rgba(255, 255, 255,0.3);
 	background: linear-gradient(180deg, rgba(0,0,0,0.07), rgba(255,255,255,0.07));
 	border-radius: 5px;
-    /*border-bottom: 1px solid #ddd;*/
 }
-
 
 .toggle {
 	padding-right: 15px;
 }
 
 .toggle button {
-	font-size: 2em;
+	font-size: 1.5em;
 	border: none;
 	background: none;
 	padding: 0;
 	line-height: 1;
 	color: #ababab;
+}
+
+.toggle button:focus, .completed .toggle button:focus {
+	color: #2a9d8f;
 }
 
 .completed .toggle button {
@@ -36,10 +38,23 @@ li.completed {
 .text {
 	box-sizing: border-box;
 	width: 75%;
+	border-radius: 5px;
+	margin-right: 15px;
+	border: 1px solid transparent;
+}
+
+.text:focus {
+	outline: none;
+	border: 1px solid #2a9d8f;
+	background: #eaeaea;
 }
 
 .actions {
 	box-sizing: border-box;
 	width: 25%;
+}
+
+.actions button {
+
 }
 
