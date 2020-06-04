@@ -1,27 +1,12 @@
 import React from 'react';
 import './ToDoApp.css';
 import ToDoItem from '../ToDoItem/ToDoItem';
-
-
-class StorageService {
-	storageKey = 'ToDoList';
-
-	static get(){
-		const storage = window.localStorage;
-		return JSON.parse(storage.getItem('ToDoList')) || null;
-	}
-
-	static save(itemList){
-		const storage = window.localStorage;
-		storage.setItem('ToDoList', JSON.stringify(itemList));
-	}
-}
+import StorageService from '../StorageService'
 
 
 class ToDoApp extends React.Component {
 	constructor(props) {
 		super(props);
-// TODO: pull items from local storage
 
 		this.state = {
 			items:[], 
