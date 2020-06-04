@@ -1,5 +1,6 @@
 import React from 'react';
 import './ToDoItem.css';
+import ToDoContentEditable from './ToDoContentEditable';
 
 class ToDoItem extends React.Component {
 	constructor(props) {
@@ -17,8 +18,7 @@ class ToDoItem extends React.Component {
 		this.toggleCompleted = this.toggleCompleted.bind(this);
 	}
 
-	editText(event){
-		let text = this.textRef.current.innerHTML;
+	editText(text){
 		if (text === this.state.text) return;
 
 		this.props.editText(this.state.key, text);
@@ -55,7 +55,6 @@ class ToDoItem extends React.Component {
 		this.props.toggleCompleted(this.state.key);
 	}
 
-
 	render() {
 		return (
 			<li className={this.state.completed ? 'completed' : ''}>
@@ -64,18 +63,7 @@ class ToDoItem extends React.Component {
 						<span className={this.state.completed ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'}></span>
 					</button>
 				</div>
-				<div 
-					className="text"
-					ref={this.textRef}
-					role="textbox" 
-					contentEditable="true" 
-					aria-label={"To Do Item: " + this.state.text} 
-					aria-required="true" 
-					suppressContentEditableWarning={true}
-					onInput={this.editText}
-					onBlur={this.editText}>
-					{this.props.item.text}
-				</div>
+				<ToDoContentEditable text={this.state.text} editText={this.editText} />
 				<div className="actions">
 					<button className="delete" onClick={this.deleteItem}>
 						<span className="icon-bin"></span> Remove
