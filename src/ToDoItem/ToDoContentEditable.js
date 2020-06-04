@@ -16,7 +16,6 @@ class ToDoContentEditable extends React.Component {
 		this.props.editText(text);
 	}
 
-
 	shouldComponentUpdate(nextProps){
         return nextProps.text !== this.textRef.current.innerHTML;
     }

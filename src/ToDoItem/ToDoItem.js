@@ -6,9 +6,6 @@ class ToDoItem extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = props.item;
-		this.textRef = React.createRef();
-
 		this.editText = this.editText.bind(this);
 		this.deleteItem = this.deleteItem.bind(this);
 		this.moveDown = this.moveDown.bind(this);
@@ -19,51 +16,51 @@ class ToDoItem extends React.Component {
 	}
 
 	editText(text){
-		if (text === this.state.text) return;
+		if (text === this.props.item.text) return;
 
-		this.props.editText(this.state.key, text);
+		this.props.editText(this.props.item.key, text);
 	}
 
 	deleteItem(event){
 		event.preventDefault();
-		this.props.deleteItem(this.state.key);
+		this.props.deleteItem(this.props.item.key);
 	}
 
 	moveDown(event){
 		event.preventDefault();
-		this.props.moveDown(this.state.key);
+		this.props.moveDown(this.props.item.key);
 	}
 
 	moveUp(event){
 		event.preventDefault();
-		this.props.moveUp(this.state.key);
+		this.props.moveUp(this.props.item.key);
 	}
 
 	moveTop(event){
 		event.preventDefault();
-		this.props.moveTop(this.state.key);
+		this.props.moveTop(this.props.item.key);
 	}
 
 	moveBottom(event){
 		event.preventDefault();
-		this.props.moveBottom(this.state.key);
+		this.props.moveBottom(this.props.item.key);
 	}
 
 	toggleCompleted(event){
 		event.preventDefault();
 
-		this.props.toggleCompleted(this.state.key);
+		this.props.toggleCompleted(this.props.item.key);
 	}
 
 	render() {
 		return (
-			<li className={this.state.completed ? 'completed' : ''}>
+			<li className={this.props.item.completed ? 'completed' : ''}>
 				<div className="toggle">
 					<button onClick={this.toggleCompleted}>
-						<span className={this.state.completed ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'}></span>
+						<span className={this.props.item.completed ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'}></span>
 					</button>
 				</div>
-				<ToDoContentEditable text={this.state.text} editText={this.editText} />
+				<ToDoContentEditable text={this.props.item.text} editText={this.editText} />
 				<div className="actions">
 					<button className="delete" onClick={this.deleteItem}>
 						<span className="icon-bin"></span> Remove
