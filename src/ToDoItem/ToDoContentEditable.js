@@ -25,10 +25,11 @@ class ToDoContentEditable extends React.Component {
 			<div 
 				className="text"
 				ref={this.textRef}
-				role="text" 
 				contentEditable="true" 
+				role="textbox"
 				aria-label={"To Do Item: " + this.props.text} 
 				aria-required="true" 
+				aria-multiline="true" 
 				suppressContentEditableWarning={true}
 				onInput={this.editText}
 				onBlur={this.editText}
