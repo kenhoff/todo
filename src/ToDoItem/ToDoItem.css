@@ -27,8 +27,9 @@ li.completed {
 	color: #ababab;
 }
 
-.toggle button:focus, .completed .toggle button:focus {
+.toggle button:focus, .completed .toggle button:focus, .toggle button:hover, .completed .toggle button:hover {
 	color: #2a9d8f;
+	cursor: pointer;
 }
 
 .completed .toggle button {
@@ -50,6 +51,11 @@ li.completed {
 	background: #eaeaea;
 }
 
+.text:hover {
+	outline: none;
+	border: 1px solid #2a9d8f;
+}
+
 .actions {
 	box-sizing: border-box;
 	width: 25%;
@@ -64,5 +70,10 @@ li.completed {
 	padding: 3px 7px;
 	border: 1px solid #C8CAE3;
 	box-shadow: 1px 1px 2px rgba(0,0,0,0.25);
+}
+
+.actions button:hover, .actions button:focus {
+	border: 1px solid #2a9d8f;
+	cursor: pointer;
 }
 
