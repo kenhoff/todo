@@ -173,7 +173,7 @@ class ToDoApp extends React.Component {
 
 		item.completed = !item.completed;
 
-		this.addItem(itemIndex, item);
+		this.updateItem(item);
 	}
 
 	editItemText(itemKey, text){
@@ -184,7 +184,7 @@ class ToDoApp extends React.Component {
 
 		item.text = text;
 		
-		this.addItem(itemIndex, item);
+		this.updateItem(item);
 	}
 
 	renderItem(item, index){
@@ -216,10 +216,13 @@ class ToDoApp extends React.Component {
 		return (
 			<div id="ToDoApp">
 				<header>
-					<input type="text" value={this.state.searchValue} name="searchInput" id="searchInput" aria-label="Filter To Do items" onChange={this.updateSearch} />
-					<button className="clear" onClick={this.clearSearch}>
-						<span className="icon-cancel-circle"></span>
-					</button>
+					<h1>To Do</h1>
+					<div className="filter">
+						<input type="text" value={this.state.searchValue} name="searchInput" id="searchInput" aria-label="Filter To Do items" onChange={this.updateSearch} />
+						<button className="clear" onClick={this.clearSearch}>
+							<span className="icon-cancel-circle"></span>
+						</button>
+					</div>
 				</header>
 				<main>
 					<ul id="ListItems">

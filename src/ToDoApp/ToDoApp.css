@@ -29,6 +29,16 @@ header {
 	padding: 15px;
 	border-bottom: 1px solid #C8CAE3;
 	text-align: center;
+	
+}
+
+header h1 {
+	margin: 0 0 10px 0;
+	font-weight: normal;
+	font-size: 1.5em;
+}
+
+header .filter {
 	position: relative;
 }
 
@@ -48,10 +58,14 @@ header input[type=text]:focus, footer input[type=text]:focus, footer button:focu
 
 header button.clear {
 	position: absolute;
-	top: 2px;
+	color: #666;
+	font-size: 24px;
+	top: 50%;
 	right: 5px;
+	margin-top: -11px;
 	background: transparent;
 	border: none;
+	padding: 0;
 	line-height: 1;
 }
 
